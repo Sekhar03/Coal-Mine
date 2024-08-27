@@ -159,18 +159,18 @@ button:hover {
 }
 
 .section-container {
-  background-color: white; /* Match the background of the Logs section */
-  border-radius: 5px; /* Match the border-radius of the Logs section */
-  padding: 15px; /* Match the padding of the Logs section */
+  background-color: white; 
+  border-radius: 5px; 
+  padding: 15px; 
   margin-top: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Match the box shadow of the Logs section */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .section-heading {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color); /* Use the same color as the Logs heading */
+  color: var(--primary-color); 
   margin-bottom: 10px;
   
 }
