@@ -33,16 +33,24 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [unreadAlerts, setUnreadAlerts] = useState(0);
 
   const handleLogin = (user) => setCurrentUser(user);
   const handleLogout = () => {
     setCurrentUser(null);
     setActiveTab('home');
+    setUnreadAlerts(0);
   };
 
   const addLog = (message) => {
     setLogs((prev) => [{ id: Date.now(), message, date: new Date().toLocaleString() }, ...prev]);
   };
+
+  React.useEffect(() => {
+    if (activeTab === 'handover-reports' || activeTab === 'internal-messaging') {
+        setUnreadAlerts(0);
+    }
+  }, [activeTab]);
 
   const addFault = (message) => {
     setFaults((prev) => [{ id: Date.now(), message, date: new Date().toLocaleString() }, ...prev]);
@@ -63,6 +71,7 @@ function App() {
     addLog(`Shift Handover logged by ${data.supervisor}`);
     
     // Automated Alerting the next shift
+    setUnreadAlerts(prev => prev + 1);
     handleNewMessage({
         sender: 'SYSTEM ALERT',
         role: 'admin',
@@ -159,7 +168,7 @@ function App() {
     <div className="container">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} currentUser={currentUser} />
       <main>
-        <Header activeTab={activeTab} currentUser={currentUser} />
+        <Header activeTab={activeTab} currentUser={currentUser} unreadAlerts={unreadAlerts} />
         <div className="content-area">
           {renderContent()}
         </div>
