@@ -1,16 +1,28 @@
 import React from 'react';
 import '../App.css';
 
-function Logs() {
+function Logs({ logs }) {
     return (
-        <section id="logs-section" className="profile">
-            <h2>Logs</h2>
-            <div className="logs-content">
-                <ul className="logs-list">
-                    <li>Log 1: Shift Manager A assigned to Mine X on 01-09-2024</li>
-                    <li>Log 2: Shift scheduled for Mine Y on 02-09-2024 at 10:00 AM</li>
-                    {/* Add more logs as necessary */}
-                </ul>
+        <section id="logs-section" className="component-section">
+            <div className="card">
+                <h2>System Logs</h2>
+                <div className="card-content">
+                    {logs.length === 0 ? (
+                        <p className="empty-state">No system actions have been logged yet.</p>
+                    ) : (
+                        <ul className="logs-list">
+                            {logs.map(log => (
+                                <li key={log.id}>
+                                    <i className="material-icons log-icon">info</i>
+                                    <div className="log-text">
+                                        <p>{log.message}</p>
+                                        <span className="timestamp">{log.date}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
         </section>
     );
